@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+  redis:
+    image: redis:alpine
+    command: redis-server --requirepass redis
+  bot:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      WEB_SERVER_HOST: ${WEB_SERVER_HOST}
+      WEB_SERVER_PORT: ${WEB_SERVER_PORT}
+      WEBHOOK_PATH: ${WEBHOOK_PATH}
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET}
+      BASE_WEBHOOK_URL: ${BASE_WEBHOOK_URL}
+      CHAT_GPT_TOKEN: ${CHAT_GPT_TOKEN}
+      DB_ENGINE: postgresql+asyncpg
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: postgres
+      REDIS_SERVER: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: redis
+    depends_on:
+        - db
+        - redis
