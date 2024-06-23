@@ -1,6 +1,5 @@
 import json
 import random
-
 from aiogram import Router
 from aiogram.types import Message
 from openai import OpenAI
@@ -23,7 +22,7 @@ tools = [
 
 
 @router.message()
-async def echo(message: Message):
+async def gpt(message: Message):
     redis = Redis()
     user_id = message.from_user.id
     async with redis.get_connection() as connection:

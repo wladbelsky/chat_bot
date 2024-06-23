@@ -1,8 +1,7 @@
-from typing import Dict, Type
-
 import sqlalchemy
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, AsyncEngine
+from typing import Dict, Type
 from database.models import metadata
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, AsyncEngine
 
 
 class Singleton(type):
