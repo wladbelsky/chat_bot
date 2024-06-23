@@ -15,7 +15,7 @@ WEB_SERVER_PORT=YOUR_WEB_SERVER_PORT
 ```
 3. Запустите проект:
 ```bash
-docker-compose up --build
+docker-compose up
 ```
 
 ## Задача
