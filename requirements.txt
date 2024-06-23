@@ -1,5 +1,6 @@
 aiogram~=3.8.0
-sqlalchemy[asyncpg]~=2.0.31
+sqlalchemy~=2.0.31
+asyncpg
 redis
 openai~=1.35.3
 aiohttp
