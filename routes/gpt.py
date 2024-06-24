@@ -2,12 +2,12 @@ import json
 import random
 from aiogram import Router
 from aiogram.types import Message
-from openai import OpenAI
+from openai import AsyncOpenAI
 from config import CHAT_GPT_TOKEN, MEMORY_TIME, OPERATOR_LIST
 from database.redis_db import Redis
 
 router = Router()
-client = OpenAI(api_key=CHAT_GPT_TOKEN)
+client = AsyncOpenAI(api_key=CHAT_GPT_TOKEN)
 
 
 tools = [
@@ -55,7 +55,7 @@ async def gpt(message: Message):
                 })
                 context_str = json.dumps(context)
                 pipe = pipe.set(f"user:{user_id}_context", context_str, ex=MEMORY_TIME)
-                response = client.chat.completions.create(
+                response = await client.chat.completions.create(
                     model="gpt-3.5-turbo",
                     messages=context,
                     tools=tools
